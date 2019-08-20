@@ -1,0 +1,35 @@
+{
+  "name": "@salilvnair/jsx-electron",
+  "version": "1.0.0",
+  "description": "React wrapper for electron's Renderer API",
+  "main": "public/public_api.js",
+  "types": "public/public_api.d.ts",
+  "scripts": {
+    "test": "node ./public/test/main.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salilvnair/jsx-electron.git"
+  },
+  "keywords": [
+    "httpclient",
+    "react"
+  ],
+  "author": "salilvnair",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salilvnair/jsx-electron/issues"
+  },
+  "homepage": "https://github.com/salilvnair/jsx-electron#readme",
+  "peerDependencies": {
+    "electron": ">=3.0.6"
+  },
+  "files": [
+    "public/**/*"
+  ],
+  "devDependencies": {
+    "electron": "^6.0.3"
+  },
+  "dependencies": {}
+}
