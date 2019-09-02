@@ -1,6 +1,6 @@
 {
   "name": "@salilvnair/jsx-electron",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React wrapper for electron's Renderer API",
   "main": "public/public_api.js",
   "types": "public/public_api.d.ts",
@@ -29,7 +29,7 @@
     "public/**/*"
   ],
   "devDependencies": {
-    "electron": "^6.0.3"
+    "electron": "^6.0.7"
   },
   "dependencies": {}
 }

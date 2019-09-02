@@ -110,4 +110,24 @@ export class JsxElectronUtil {
         }
         return appPath;
     }
+
+    os() {
+        return this.process.platform;
+    }
+
+    pwd() {
+        if(this.os()==='win32'){
+            return this.env().INIT_CWD
+        }
+        return this.env().PWD
+    }
+
+    npmVersion() {
+        let jsonFile = this.remote.require('jsonfile');
+        let path = this.remote.require('path');
+        let packageJsonPath = path.resolve(this.appPath(),"package.json");
+        let packageJson = jsonFile.readFileSync(packageJsonPath);
+        return packageJson.version;
+    }
+  
 }
