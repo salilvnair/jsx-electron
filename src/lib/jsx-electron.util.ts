@@ -40,11 +40,11 @@ export class JsxElectronUtil {
         return this.isElectronApp && this.process.arch === 'x64';
     }
 
-    desktopCapturer(): Electron.DesktopCapturer {
+    get desktopCapturer(): Electron.DesktopCapturer {
         return this.electron ? this.electron.desktopCapturer : null;
     }
 
-    ipcRenderer(): Electron.IpcRenderer {
+    get ipcRenderer(): Electron.IpcRenderer {
         return this.electron ? this.electron.ipcRenderer : null;
     }
 
@@ -52,15 +52,15 @@ export class JsxElectronUtil {
         return this.electron ? this.electron.remote : null;
     }
 
-    webFrame(): Electron.WebFrame {
+    get webFrame(): Electron.WebFrame {
         return this.electron ? this.electron.webFrame : null;
     }
 
-    clipboard(): Electron.Clipboard {
+    get clipboard(): Electron.Clipboard {
         return this.electron ? this.electron.clipboard : null;
     }
 
-    crashReporter(): Electron.CrashReporter {
+    get crashReporter(): Electron.CrashReporter {
         return this.electron ? this.electron.crashReporter : null;
     }
 
@@ -68,15 +68,15 @@ export class JsxElectronUtil {
         return this.remote ? this.remote.process : null;
     }
 
-    nativeImage(): typeof Electron.nativeImage {
+    get nativeImage(): typeof Electron.nativeImage {
         return this.electron ? this.electron.nativeImage : null;
     }
 
-    screen(): Electron.Screen {
+    get screen(): Electron.Screen {
         return this.electron ? this.electron.screen : null;
     }
 
-    shell(): Electron.Shell {
+    get shell(): Electron.Shell {
         return this.electron ? this.electron.shell : null;
     }
 
