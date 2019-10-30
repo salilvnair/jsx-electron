@@ -129,5 +129,71 @@ export class JsxElectronUtil {
         let packageJson = jsonFile.readFileSync(packageJsonPath);
         return packageJson.version;
     }
-  
+
+    clientRequest(): Electron.ClientRequest {
+        return this._electron.ClientRequest;
+    }
+
+    get(url, headers, partitionEnabled, partitionName) {
+        var parser = document.createElement('a');
+        parser.href = url;
+        var protocol = parser.protocol;
+        var hostname = parser.hostname;
+        var path = parser.pathname;
+        if (parser.search) {
+            path = path + parser.search;
+        }
+        var requestApi = {
+            method: "GET",
+            headers: headers,
+            protocol: protocol,
+            hostname: hostname,
+            path: path,
+            partition: partitionEnabled ? partitionName : null
+        };
+        //console.log(requestApi);
+        var net = this.electron.remote.net;
+        //console.log(net);
+        const clientRequest = net.request(requestApi);
+        //console.log(clientRequest);
+        clientRequest.on('response', function (response) {
+          //console.log(`STATUS: ${response.statusCode}`)
+          //console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
+          response.on('data', (chunk) => {
+            //console.log(`BODY: ${chunk}`)
+          })
+          response.on('end', () => {
+            //console.log('No more data in response.')
+          })
+        });
+        clientRequest.end();
+    }
+
+    save(url: string, fileName:string) {
+      var remote = this.electron.remote;
+      var dialog = remote.dialog;
+      var app = remote.app;
+      var path = remote.require('path');
+      var toLocalPath = path.resolve(app.getPath("desktop"), fileName);
+      var userChosenPath = dialog.showSaveDialogSync({ defaultPath: toLocalPath });
+      if(userChosenPath){
+          this.downloadFromUrl (url, userChosenPath, null)
+      }
+    }
+
+    private downloadFromUrl(url:string, dest:string, cb:any) {
+        var remote = this.electron.remote;
+        var https = remote.require('https');
+        var fs = remote.require('fs');
+        var file = fs.createWriteStream(dest);
+        var request = https.get(url, function(response) {
+            response.pipe(file);
+            file.on('finish', function() {
+                file.close(cb); // close() is async, call cb after close completes.
+            });
+        }).on('error', function(err) { // Handle errors
+            fs.unlink(dest); // Delete the file async. (But we don't check the result)
+            if (cb) cb(err.message);
+        });
+    }
 }
