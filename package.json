@@ -29,7 +29,7 @@
     "public/**/*"
   ],
   "devDependencies": {
-    "electron": "^6.0.7"
+    "electron": "^18.3.7"
   },
   "dependencies": {}
 }
